@@ -20,11 +20,12 @@ class PublicController extends Controller {
 	 *
 	 * @return void
 	 */
+    /**
 	public function __construct()
 	{
 		$this->middleware('guest');
 	}
-
+*/
     /**
      * Page with list of teams
      *
