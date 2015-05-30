@@ -37,7 +37,7 @@
 
                         <div class="form-group">
                             <div class="col-md-offset-4">
-                                <button class="btn btn-success">Submit</button>
+                                <button class="btn btn-success btn-margin">Submit</button>
                             </div>
                         </div>
 
