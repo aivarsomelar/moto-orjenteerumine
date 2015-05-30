@@ -1,6 +1,37 @@
 .btn-margin {
     margin: 15px;
 }
+
+.pic-margin {
+    margin: 10px;
+}
+
+.row-cover {
+    margin-top: -100px;
+    z-index: -9;
+    position: relative;
+    -webkit-mask-image:-webkit-gradient(linear, left bottom, left top,from(#eeeeee), to(rgba(0,0,0,0)));
+    overflow: hidden;
+    max-height: 600px;
+}
+.thumbnail img {
+    height: 280px;
+}
+.thumbnail:hover {
+    opacity: 0.8;
+}
+.row-cover img {
+    width: 100%;
+    max-height: 900px;
+}
+.max-page-height {
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+}
+.pic-margin h3, h4 {
+    text-align: center;
+}
 .welcome-title {
     font-size: 96px;
     margin-bottom: 40px;

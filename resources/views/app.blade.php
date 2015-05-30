@@ -35,7 +35,7 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}">Teamid</a></li>
+                    <li><a href="{{ url('/team/all') }}">Teamid</a></li>
                     <li role="presentation" class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                             Minu Team<span class="caret"></span>
@@ -64,9 +64,9 @@
 			</div>
 		</div>
 	</nav>
-
-	@yield('content')
-
+    <div class=container">
+	    @yield('content')
+    </div>
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
