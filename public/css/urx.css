@@ -1,3 +1,40 @@
 .btn-margin {
     margin: 15px;
 }
+.welcome-title {
+    font-size: 96px;
+    margin-bottom: 40px;
+}
+
+.welcome-quote {
+    font-size: 24px;
+    color: black;
+}
+.welcome-content {
+    text-align: center;
+    margin-top: 10%;
+    color: #B0BEC5;
+    font-family: 'Lato';
+}
+.welcome-container {
+    text-align: center;
+    font-weight: 100;
+    color: #B0BEC5;
+    font-family: 'Lato';
+}
+.welcome-body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    color: #B0BEC5;
+    display: table;
+    font-weight: 100;
+    font-family: 'Lato';
+}
+@media (max-width: 400px) {
+    .welcome-title {
+        font-size: 50px;
+        margin-bottom: 40px;
+    }
+}
