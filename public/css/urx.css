@@ -16,6 +16,7 @@
 }
 .thumbnail img {
     height: 280px;
+    width: 100%;
 }
 .thumbnail:hover {
     opacity: 0.8;
@@ -80,7 +81,15 @@
     font-family: 'Lato';
     margin-bottom: 30px;
 }
-.dashboard-section div a {
+.no-a-effects {
+    text-decoration: none;
+    color: inherit;
+}
+.no-a-effects:hover{
+    text-decoration: none;
+    color: inherit;
+}
+.dashboard-section a {
     padding: 20px;
 }
 .dashboard-section ul li a{
@@ -113,5 +122,17 @@
     .dashboard-section button {
         min-height: 50px;
         min-width: 100%;
+    }
+    .max-page-height .container {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .max-page-height .jumbotron {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .max-page-height div {
+        padding-left: 7px;
+        padding-right: 7px;
     }
 }

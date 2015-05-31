@@ -42,8 +42,8 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ url('/home') }}">Dashboard</a></li>
-                            <li><a href="{{ url('/') }}">Teami kirjeldus</a></li>
-                            <li><a href="{{ url('/') }}">Teami ülesanded</a></li>
+                            <li><a href="{{url('/team/description')}}">Teami kirjeldus</a></li>
+                            <li><a href="{{ url('/riddle/show') }}">Teami ülesanded</a></li>
                             <li><a href="{{ url('/') }}">Teami pildid</a></li>
                         </ul>
                     </li>
