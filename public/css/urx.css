@@ -32,6 +32,9 @@
 .pic-margin h3, h4 {
     text-align: center;
 }
+.pic-round {
+    border-radius: 50%;
+}
 .welcome-title {
     font-size: 96px;
     margin-bottom: 40px;
@@ -63,9 +66,52 @@
     font-weight: 100;
     font-family: 'Lato';
 }
+.dashboard-item {
+    padding: 15px;
+}
+.dashboard-section {
+    margin: 0;
+    padding: 20px;
+    background: #FDFDFD;
+    font-size: 18px;
+}
+.dashboard-section h3 {
+    font-weight: bold;
+    font-family: 'Lato';
+    margin-bottom: 30px;
+}
+.dashboard-section div a {
+    padding: 20px;
+}
+.dashboard-section ul li a{
+    display: inline-block;
+}
+.dashboard-section ul li{
+    list-style-type: none;
+}
+.dashboard-section ul{
+    padding: 0;
+}
+.member-avatar {
+    width: 50px;
+    height: 38px;
+}
+.list {
+    padding: 7px;
+}
 @media (max-width: 400px) {
     .welcome-title {
         font-size: 50px;
         margin-bottom: 40px;
+    }
+    .dashboard-section {
+        margin: 10px 0 10px 0;
+    }
+    .dashboard-section textarea {
+        min-height: 100px;
+    }
+    .dashboard-section button {
+        min-height: 50px;
+        min-width: 100%;
     }
 }
