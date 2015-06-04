@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Library\Cover\CoverController;
 use Illuminate\View\View;
 
 class PublicController extends Controller {
@@ -45,7 +46,8 @@ class PublicController extends Controller {
      */
     public function teamDescription()
     {
-        return view('teams.description');
+        $coverPicture = new CoverController();
+        return view('teams.description')->with('cover', $coverPicture->getRandomCoverPicWithPath());
     }
 
 }

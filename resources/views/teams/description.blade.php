@@ -21,8 +21,6 @@
     </div>
 
 
-    <div class="row row-cover">
-        <img src="/pic/covers/car-rims.jpg" alt="...">
-    </div>
+    @include('parts.cover')
     </div>
 @endsection

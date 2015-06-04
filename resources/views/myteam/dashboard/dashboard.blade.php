@@ -20,9 +20,7 @@
         </div>
     </div>
 
+    @include('parts.cover')
 
-    <div class="row row-cover">
-        <img src="/pic/covers/car-rims.jpg">
-    </div>
 </div>
 @endsection

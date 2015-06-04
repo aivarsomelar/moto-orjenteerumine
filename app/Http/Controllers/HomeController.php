@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Library\Cover\CoverController;
+
 class HomeController extends Controller {
 
 	/*
@@ -28,7 +30,8 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('myteam.dashboard.dashboard');
-	}
+        $covers = new CoverController();
 
+		return view('myteam.dashboard.dashboard')->with('cover', $covers->getRandomCoverPicWithPath());
+	}
 }
