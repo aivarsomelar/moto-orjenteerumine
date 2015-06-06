@@ -6,7 +6,7 @@
                 <a href="#">Muuda profiili pilti</a>
             </li>
             <li class="row list">
-                <a href="#">Muuda cover pilti</a>
+                <a href="{{url('/picture/cover/form')}}">Muuda cover pilti</a>
             </li>
             <li class="row list">
                 <a href="#">Muuda team'i kirjeldust</a>

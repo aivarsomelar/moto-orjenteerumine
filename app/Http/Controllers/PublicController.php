@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use App\Library\Cover\CoverController;
+use App\Library\Image\Cover\CoverController;
 use Illuminate\View\View;
 
 class PublicController extends Controller {

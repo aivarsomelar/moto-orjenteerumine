@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use PhpSpec\Exception\Exception;
 
 class RiddleController extends Controller {
-
+fi
 	/**
 	 * Show the application dashboard to the user.
 	 *

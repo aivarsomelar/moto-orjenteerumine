@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
-use App\Library\Cover\CoverController;
+
+use App\Library\Image\Cover\CoverController;
 
 class HomeController extends Controller {
 

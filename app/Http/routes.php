@@ -20,6 +20,9 @@ Route::post('/riddle/save', 'RiddleController@saveRiddle');
 Route::get('/team/all', 'PublicController@allTeams');
 Route::get('/team/description', 'PublicController@teamDescription');
 
+Route::get('/picture/cover/form', 'UploadController@getCoverUploadForm');
+Route::post('/picture/cover/save', 'UploadController@saveCoverPicture');
+
 Route::get('/home', 'HomeController@index');
 
 Route::controllers([

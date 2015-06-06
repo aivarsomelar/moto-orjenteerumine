@@ -1,23 +1,16 @@
 <?php
-namespace App\Library\Cover;
+namespace App\Library\Image\Cover;
 
 use App\Http\Controllers\Controller;
+use App\Library\Image\Image;
 use Exception;
 use Illuminate\Support\Facades\DB;
-
 
 /**
  * Control actions with cover pictures
  */
 class CoverController extends Controller
 {
-
-    /**
-     * All covers pictures from database
-     */
-    private $allCovers;
-
-    private $count;
 
     /**
      * Folder path to covers pictures
@@ -32,6 +25,8 @@ class CoverController extends Controller
      * @var string
      */
     const TABLE = 'covers';
+
+    private $error;
 
     /**
      * Get random cover picture data
@@ -60,5 +55,38 @@ class CoverController extends Controller
         }
 
         return $result;
+    }
+
+    public function uploadCoverPictureFile($uploadedFile)
+    {
+
+        $cover = new Image(self::PATH);
+
+        if (!$cover->uploadImage($uploadedFile)) {
+            $this->setError($cover->getError());
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Get error message
+     *
+     * @return mixed
+     */
+    public function getError()
+    {
+        return $this->error;
+    }
+
+    /**
+     * Set error message
+     *
+     * @param mixed $error
+     */
+    public function setError($error)
+    {
+        $this->error = $error;
     }
 }
