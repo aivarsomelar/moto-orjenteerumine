@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * Seed cover table with picture names
  */
-class CoversSeeder extends Seeder {
+class CoverSeeder extends Seeder {
 
 	/**
 	 * Run the database seeds.
@@ -18,8 +18,8 @@ class CoversSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		DB::table('covers')->delete();
-		DB::table('covers')->insert(
+		DB::table('cover')->delete();
+		DB::table('cover')->insert(
             [
                 ['file_name' => 'Audi_R8_city.jpg'],
                 ['file_name' => 'Black_BMW_E46.jpg'],

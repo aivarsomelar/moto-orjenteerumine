@@ -12,7 +12,7 @@ class CreateCoversPictureTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('covers', function(Blueprint $table)
+		Schema::create('cover', function(Blueprint $table)
 		{
 			$table->increments('id');
             $table->string('file_name');
