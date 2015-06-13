@@ -24,7 +24,7 @@ class CoverController extends Controller
      *
      * @var string
      */
-    const TABLE = 'cover';
+    const TABLE = 'pictures';
 
     private $error;
 
@@ -33,7 +33,7 @@ class CoverController extends Controller
      */
     public function getRandomCoverPicData()
     {
-        $query = DB::table(self::TABLE)->orderByRaw('RAND()')->take(1)->get();
+        $query = DB::table(self::TABLE)->where('level', '=', 'cover')->orderByRaw('RAND()')->take(1)->get();
 
         if (!$query) {
             throw new Exception("There was problem wit getting random cover picture");
@@ -57,18 +57,6 @@ class CoverController extends Controller
         return $result;
     }
 
-    public function uploadCoverPictureFile($uploadedFile)
-    {
-
-        $cover = new Image(self::PATH);
-
-        if (!$cover->uploadImage($uploadedFile)) {
-            $this->setError($cover->getError());
-            return false;
-        }
-
-        return true;
-    }
 
     /**
      * Get error message
