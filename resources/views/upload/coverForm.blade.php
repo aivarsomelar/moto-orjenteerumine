@@ -23,6 +23,7 @@
                             <label class="col-md-4 control-label" for="cover">Lae ülesse "cover" pilt</label>
                             <div class="col-md-6">
                                 <input id="cover" class="form-control" name="cover" type="file">
+                                <p class="text-muted">NB: Kõik "cover" pildid on ühiskasutuses. "cover" pildid vahetuvad automaatselt dashboard'i jaluses</p>
                             </div>
                         </div>
 

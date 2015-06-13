@@ -2,7 +2,9 @@
 namespace App\Library\Image;
 
 use Exception;
-use Sirius\Upload\Handler;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Image upload settings
@@ -13,10 +15,23 @@ class Image
     /**
      * Instant of upload handler
      *
-     * @var Handler
+     * @var Request
      */
     private $uploadHandler;
 
+    /**
+     * Table name where pictures are stored
+     *
+     * @var string
+     */
+    private $pictureTable;
+
+    /**
+     * Path in file system where picture is stored
+     *
+     * @var string
+     */
+    private $filePath;
     /**
      * Error message
      *
@@ -24,57 +39,123 @@ class Image
      */
     private $error;
 
-    public function __construct($filePath)
-    {
-
-        $this->uploadHandler = new Handler($filePath);
-        $this->configuration();
-        $this->validation();
-    }
-
     /**
-     * Set configuration options
+     * @param string $inputName     Html input filed name what is used for file upload
+     * @param string $filePath      Path where file will be saved in file system
+     * @param string $pictureTable  Table name where pictures are stored
      */
-    private function configuration()
+    public function __construct($inputName, $filePath, $pictureTable)
     {
 
-        $this->uploadHandler->setOverwrite(false);
-        $this->uploadHandler->setAutoconfirm(false);
+        $this->pictureTable = $pictureTable;
+        $this->filePath = $filePath;
+        $this->uploadHandler = Request::file($inputName);
+    }
+
+    public function uploadPicture()
+    {
+
+        if ($this->validateFileType()->fails()) {
+            $this->setError('File have to be picture (jpeg, png)');
+            return false;
+        }
+
+        if (!$this->uploadHandler->isValid()) {
+            $this->setError('File upload to tmp folder failed');
+            return false;
+        }
+
+        $fileName = $this->generateFileName();
+
+        if ($this->uploadHandler->move(public_path($this->filePath), $fileName)) {
+            $query = DB::table('cover')->insert(
+                ['file_name' => $fileName]
+            );
+
+            if (!$query) {
+                $this->setError('Inserting file name in database failed');
+                return false;
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
-     * Validation rules for image
-     */
-    private function validation()
-    {
-        $this->uploadHandler->addRule('extension', ['allowed' => 'jpg', 'jpeg', 'png'], 'Fail {label} peab olema pilt(jpg, jpeg ,png)');
-        $this->uploadHandler->addRule('size', ['max' => '7M'], 'Fail {label} ei tohi olla suurem kui 7mb');
-    }
-
-    /**
-     * Upload image file
+     * Validate file type with laravel validator
      *
-     * @param $file uploaded image file from $_FILE
+     * @return mixed
+     */
+    private function validateFileType()
+    {
+        $validation = Validator::make(
+            ['cover' => $this->uploadHandler],
+            [
+                'cover' => 'mimes:jpeg,png'
+            ]
+        );
+
+        return $validation;
+    }
+
+    /**
+     * Check that picture with same name does not exist in table where pictures are stored
+     *
+     * @param $filename
      * @return bool
      */
-    public function uploadImage($file)
+    private function validateFileName($filename)
     {
 
-        $image = $this->uploadHandler->process($file);
+        $results = DB::table($this->getPictureTable())->where('file_name', $filename)->first();
 
-        if (!$image->valid()) {
-            $this->setError($image->getMessages());
+        if ($results) {
             return false;
         }
 
-        try {
-            $image->confirm();
-        } catch (Exception $exception) {
-            $this->setError('File upload failed: ' . $exception);
-            return false;
+        return $filename;
+    }
+
+    /**
+     * Generate random file name
+     *
+     * @return int
+     */
+    private function generateFileName()
+    {
+        //generate new file name
+        $generatedName = rand(1000, 100000). '.'. $this->uploadHandler->getClientOriginalExtension();
+
+        if(!$this->validateFileName($generatedName)) {
+            $this->generateFileName();
         }
 
-        return true;
+        return $generatedName;
+    }
+
+    /**
+     * Get table name where pictures are stored
+     *
+     * @return string
+     */
+    public function getPictureTable()
+    {
+        return $this->pictureTable;
+    }
+
+    /**
+     * Set table name where pictures are restored
+     *
+     * @param string $pictureTable
+     * @return $this
+     */
+    public function setPictureTable($pictureTable)
+    {
+        $this->pictureTable = $pictureTable;
+
+        return $this;
     }
 
     /**
