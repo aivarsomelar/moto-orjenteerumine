@@ -24,7 +24,7 @@ class CoverController extends Controller
      *
      * @var string
      */
-    const TABLE = 'covers';
+    const TABLE = 'cover';
 
     private $error;
 
