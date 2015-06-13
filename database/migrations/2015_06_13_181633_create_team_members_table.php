@@ -18,7 +18,7 @@ class CreateTeamMembersTable extends Migration {
 			$table->string('name');
             $table->unsignedInteger('avatar');
 
-            $table->foreign('avatar')->references('id')->on('avatar');
+            $table->foreign('avatar')->references('id')->on('pictures');
 		});
 	}
 

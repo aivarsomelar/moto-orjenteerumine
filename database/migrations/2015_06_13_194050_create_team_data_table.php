@@ -19,6 +19,9 @@ class CreateTeamDataTable extends Migration {
             $table->unsignedInteger('profile_picture');
             $table->string('description');
 			$table->timestamps();
+
+            $table->foreign('team_id')->references('id')->on('users');
+            $table->foreign('profile_picture')->references('id')->on('pictures');
 		});
 	}
 
