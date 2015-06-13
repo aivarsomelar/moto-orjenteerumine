@@ -14,8 +14,8 @@ class UploadController extends Controller {
     public function saveCoverPicture()
     {
 
-        $upload = new Image('cover', '/pic/covers/', 'pictures');
-        if(!$upload->uploadPicture()) {
+        $upload = new Image('cover', '/pic/covers/', 'cover');
+        if(!$upload->uploadPicture(true)) {
             return redirect()->back()->withErrors($upload->getError());
         }
 

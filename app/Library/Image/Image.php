@@ -24,8 +24,14 @@ class Image
      *
      * @var string
      */
-    private $pictureTable;
+    private $pictureTable = 'pictures';
 
+    /**
+     * Level or type of pictures, like cover, profile, avatar
+     *
+     * @var string
+     */
+    private $pictureLevel;
     /**
      * Path in file system where picture is stored
      *
@@ -42,17 +48,23 @@ class Image
     /**
      * @param string $inputName     Html input filed name what is used for file upload
      * @param string $filePath      Path where file will be saved in file system
-     * @param string $pictureTable  Table name where pictures are stored
+     * @param string $pictureLevel  Level or type of pictures, like cover, profile, avatar
      */
-    public function __construct($inputName, $filePath, $pictureTable)
+    public function __construct($inputName, $filePath, $pictureLevel)
     {
 
-        $this->pictureTable = $pictureTable;
+        $this->pictureLevel = $pictureLevel;
         $this->filePath = $filePath;
         $this->uploadHandler = Request::file($inputName);
     }
 
-    public function uploadPicture()
+    /**
+     * Upload picture and add it to database
+     *
+     * @param bool $reusable
+     * @return bool
+     */
+    public function uploadPicture($reusable = false)
     {
 
         if ($this->validateFileType()->fails()) {
@@ -68,8 +80,12 @@ class Image
         $fileName = $this->generateFileName();
 
         if ($this->uploadHandler->move(public_path($this->filePath), $fileName)) {
-            $query = DB::table('cover')->insert(
-                ['file_name' => $fileName]
+            $query = DB::table($this->pictureTable)->insert(
+                [
+                    'file_name' => $fileName,
+                    'level' => $this->pictureLevel,
+                    'reusable' => $reusable
+                ]
             );
 
             if (!$query) {
@@ -109,7 +125,7 @@ class Image
     private function validateFileName($filename)
     {
 
-        $results = DB::table($this->getPictureTable())->where('file_name', $filename)->first();
+        $results = DB::table($this->pictureTable)->where('file_name', $filename)->first();
 
         if ($results) {
             return false;
@@ -133,29 +149,6 @@ class Image
         }
 
         return $generatedName;
-    }
-
-    /**
-     * Get table name where pictures are stored
-     *
-     * @return string
-     */
-    public function getPictureTable()
-    {
-        return $this->pictureTable;
-    }
-
-    /**
-     * Set table name where pictures are restored
-     *
-     * @param string $pictureTable
-     * @return $this
-     */
-    public function setPictureTable($pictureTable)
-    {
-        $this->pictureTable = $pictureTable;
-
-        return $this;
     }
 
     /**
