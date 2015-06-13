@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder {
 		Model::unguard();
 
 		$this->call('CoverSeeder');
+		$this->call('AvatarSeeder');
+		$this->call('UsersSeeder');
 	}
 
 }

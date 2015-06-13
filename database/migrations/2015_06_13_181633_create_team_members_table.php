@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCoversPictureTable extends Migration {
+class CreateTeamMembersTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,13 @@ class CreateCoversPictureTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('cover', function(Blueprint $table)
+		Schema::create('team_member', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->string('file_name');
+			$table->string('name');
+            $table->unsignedInteger('avatar');
+
+            $table->foreign('avatar')->references('id')->on('avatar');
 		});
 	}
 
@@ -26,7 +29,7 @@ class CreateCoversPictureTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('cover');
+		Schema::drop('team_member');
 	}
 
 }
