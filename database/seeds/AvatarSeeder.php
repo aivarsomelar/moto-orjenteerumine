@@ -18,39 +18,47 @@ class AvatarSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		DB::table('avatar')->delete();
-		DB::table('avatar')->insert(
+		DB::table('pictures')->delete();
+		DB::table('pictures')->insert(
             [
                 [
                     'file_name' => 'a01.png',
+                    'level' => 'avatar',
                     'reusable' => 1
                 ],
                 [
                     'file_name' => 'A7Dy18f.png',
+                    'level' => 'avatar',
                     'reusable' => 1
                 ],
                 [
                     'file_name' => 'd05.png',
+                    'level' => 'avatar',
                     'reusable' => 1
                 ],
                 [
                     'file_name' => 'fh04.png',
+                    'level' => 'avatar',
                     'reusable' => 1
                 ],
                 [
                     'file_name' => 'g04.png',
+                    'level' => 'avatar',
                     'reusable' => 1
                 ],
                 [
                     'file_name' => 'mrc2.png',
+                    'level' => 'avatar',
                     'reusable' => 1
                 ],
                 [
                     'file_name' => 'peng42.png',
+                    'level' => 'avatar',
                     'reusable' => 1
                 ],
                 [
                     'file_name' => 'tbn42.jpg',
+                    'level' => 'avatar',
                     'reusable' => 1
                 ]
             ]
