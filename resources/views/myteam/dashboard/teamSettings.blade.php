@@ -3,7 +3,7 @@
         <h3>Seaded</h3>
         <ul class="text-center">
             <li class="row list">
-                <a href="#">Muuda profiili pilti</a>
+                <a href="{{url('/picture/profile/form')}}">Muuda profiili pilti</a>
             </li>
             <li class="row list">
                 <a href="{{url('/picture/cover/form')}}">Muuda cover pilti</a>
