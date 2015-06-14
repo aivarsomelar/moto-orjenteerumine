@@ -57,7 +57,15 @@ class CoverController extends Controller
         return $result;
     }
 
+    public function uploadCoverPicture()
+    {
+        $upload = new Image('cover', '/pic/covers/', 'cover');
+        if(!$upload->uploadPicture(true)) {
+            return redirect()->back()->withErrors($upload->getError());
+        }
 
+        return redirect()->back()->with('message', 'Cover picture successfully uploaded');
+    }
     /**
      * Get error message
      *
