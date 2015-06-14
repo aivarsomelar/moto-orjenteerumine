@@ -46,6 +46,13 @@ class Image
     private $error;
 
     /**
+     * Picture database id
+     *
+     * @var int
+     */
+    private $pictureId;
+
+    /**
      * @param string $inputName     Html input filed name what is used for file upload
      * @param string $filePath      Path where file will be saved in file system
      * @param string $pictureLevel  Level or type of pictures, like cover, profile, avatar
@@ -80,7 +87,7 @@ class Image
         $fileName = $this->generateFileName();
 
         if ($this->uploadHandler->move(public_path($this->filePath), $fileName)) {
-            $query = DB::table($this->pictureTable)->insert(
+            $query = DB::table($this->pictureTable)->insertGetId(
                 [
                     'file_name' => $fileName,
                     'level' => $this->pictureLevel,
@@ -93,6 +100,7 @@ class Image
                 return false;
             }
 
+            $this->setPictureId($query);
             return true;
         }
 
@@ -170,6 +178,25 @@ class Image
     public function setError($message)
     {
         $this->error = $message;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPictureId()
+    {
+        return $this->pictureId;
+    }
+
+    /**
+     * @param int $pictureId
+     * @return $this
+     */
+    public function setPictureId($pictureId)
+    {
+        $this->pictureId = $pictureId;
+
         return $this;
     }
 }
