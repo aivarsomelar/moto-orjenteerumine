@@ -28,7 +28,7 @@
 
                         <div class="checkbox">
                             <label class="col-md-offset-4 control-label" for="reusable">
-                                <input id="reusable" name="profile" type="checkbox">Kas oled nõus andma seda pilti ühiskasutusse
+                                <input id="reusable" name="reusable" type="checkbox">Kas oled nõus andma seda pilti ühiskasutusse
                             </label>
                         </div>
 
