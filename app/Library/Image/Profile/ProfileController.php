@@ -13,6 +13,11 @@ class ProfileController
 {
 
     /**
+     * File system path where profile pictures are stored
+     */
+    const PATH = '/pic/profile/';
+
+    /**
      * Team id
      *
      * @var int
@@ -25,13 +30,14 @@ class ProfileController
      * @var Image
      */
     private $uploadHandler;
+
     /**
      * Set team id
      */
     public function __construct()
     {
         $this->teamId = Auth::id();
-        $this->uploadHandler = new Image('profile', '/pic/profile', 'profile');
+        $this->uploadHandler = new Image('profile', self::PATH, 'profile');
     }
 
     /**
@@ -54,10 +60,19 @@ class ProfileController
                 return $this->redirectWithErrors();
             }
         } else {
-            $this->updateTeamData();
-            if ($this->updateTeamData()) {
+
+            if (!$this->updateTeamData($this->uploadHandler->getPictureId())) {
                 return $this->redirectWithErrors();
             }
+        }
+
+        return redirect()->back()->with('message', 'Profile picture successfully uploaded');
+    }
+
+    public function setProfilePicture($id)
+    {
+        if (!$this->updateTeamData($id)) {
+            return $this->redirectWithErrors();
         }
 
         return redirect()->back()->with('message', 'Profile picture successfully uploaded');
@@ -120,14 +135,15 @@ class ProfileController
     /**
      * Update profile picture in team_data table
      *
+     * @param int $pictureId
      * @return bool
      */
-    private function updateTeamData()
+    private function updateTeamData($pictureId)
     {
 
         $query = DB::table('team_data')
             ->where('team_id', $this->teamId)
-            ->update(['profile_picture' => $this->uploadHandler->getPictureId()]);
+            ->update(['profile_picture' => $pictureId]);
 
         if (!$query) {
             $this->uploadHandler->setError('Something went wrong while updating team data');
@@ -147,4 +163,31 @@ class ProfileController
 
         return redirect()->back()->withErrors($this->uploadHandler->getError());
     }
+
+    /**
+     * Get all reusable profile pictures from database
+     *
+     * @return bool
+     */
+    public function getAllProfilePicturesData()
+    {
+
+        $query = DB::table('pictures')
+            ->where('level', '=', 'profile')
+            ->where('reusable', '=', 1)
+            ->get();
+
+        if (!$query) {
+            return false;
+        }
+
+        return $query;
+    }
+
+    public function getProfilePicturesPath()
+    {
+
+        return self::PATH;
+    }
+
 }
