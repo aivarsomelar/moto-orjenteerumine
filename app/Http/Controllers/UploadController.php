@@ -1,25 +1,49 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Library\Image\Image;
+use App\Library\Image\Cover\CoverController;
+use App\Library\Image\Profile\ProfileController;
+use Illuminate\Support\Facades\Request;
 
-class UploadController extends Controller {
+class UploadController extends Controller
+{
 
+    /**
+     * Display upload form for cover picture uploading
+     *
+     * @return \Illuminate\View\View
+     */
 	public function getCoverUploadForm()
 	{
 
         return view('upload.coverForm');
 	}
 
+    /**
+     *
+     */
+    public function getProfileUploadForm()
+    {
+        return view('upload.profileForm');
+    }
+
+    /**
+     * Save uploaded cover picture into database and correct folder
+     *
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function saveCoverPicture()
     {
 
-        $upload = new Image('cover', '/pic/covers/', 'cover');
-        if(!$upload->uploadPicture(true)) {
-            return redirect()->back()->withErrors($upload->getError());
-        }
+        $cover = new CoverController();
+        return $cover->uploadCoverPicture();
+    }
 
-        return redirect()->back()->with('message', 'Cover picture successfully uploaded');
+    public function saveProfilePicture(Request $request)
+    {
+
+        $profile = new ProfileController();
+        return $profile->uploadProfilePicture($request);
     }
 
 }

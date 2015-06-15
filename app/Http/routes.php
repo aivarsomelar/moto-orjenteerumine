@@ -22,6 +22,8 @@ Route::get('/team/description', 'PublicController@teamDescription');
 
 Route::get('/picture/cover/form', 'UploadController@getCoverUploadForm');
 Route::post('/picture/cover/save', 'UploadController@saveCoverPicture');
+Route::get('/picture/profile/form', 'UploadController@getProfileUploadForm');
+Route::post('/picture/profile/save', 'UploadController@saveProfilePicture');
 
 Route::get('/home', 'HomeController@index');
 
