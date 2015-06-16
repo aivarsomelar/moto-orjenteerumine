@@ -9,6 +9,14 @@ class UploadController extends Controller
 {
 
     /**
+     * Create a new controller instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display upload form for cover picture uploading
      *
      * @return \Illuminate\View\View

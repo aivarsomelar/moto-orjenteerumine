@@ -3,7 +3,16 @@
 use App\Http\Requests;
 use App\Library\Image\Profile\GetPicture;
 
-class PictureController extends Controller {
+class PictureController extends Controller
+{
+
+    /**
+     * Create a new controller instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
 	/**
 	 * Display all profile pictures
