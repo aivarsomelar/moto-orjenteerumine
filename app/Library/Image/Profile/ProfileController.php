@@ -1,6 +1,7 @@
 <?php
 namespace App\Library\Image\Profile;
 
+use App\Library\Handler\Error\ErrorHandler;
 use App\Library\Image\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -32,12 +33,20 @@ class ProfileController
     protected $uploadHandler;
 
     /**
+     * Instance of error handler
+     *
+     * @var ErrorHandler
+     */
+    protected $errorHandler;
+
+    /**
      * Set team id
      */
     public function __construct()
     {
         $this->teamId = Auth::id();
         $this->uploadHandler = new Image('profile', self::PATH, 'profile');
+        $this->errorHandler = new ErrorHandler();
     }
 
     /**
@@ -88,7 +97,7 @@ class ProfileController
         ]);
 
         if (!$query) {
-            $this->uploadHandler->setError('Something went wrong while inserting team data');
+            $this->errorHandler->setError('Something went wrong while inserting team data');
             return false;
         }
 
@@ -109,7 +118,7 @@ class ProfileController
             ->update(['profile_picture' => $pictureId]);
 
         if (!$query) {
-            $this->uploadHandler->setError('Something went wrong while updating team data');
+            $this->errorHandler->setError('Something went wrong while updating team data');
             return false;
         }
 
@@ -124,7 +133,7 @@ class ProfileController
     protected function redirectWithErrors()
     {
 
-        return redirect()->back()->withErrors($this->uploadHandler->getError());
+        return redirect()->back()->withErrors($this->errorHandler->getError());
     }
 
     /**

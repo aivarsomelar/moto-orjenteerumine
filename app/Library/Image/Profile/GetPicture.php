@@ -21,7 +21,7 @@ class GetPicture extends ProfileController
             ->get();
 
         if (!$query) {
-            return false;
+            return $this->errorHandler->setError('No profile pictures were found!');
         }
 
         return $query;
@@ -32,7 +32,7 @@ class GetPicture extends ProfileController
         $query = DB::table('team_data')->select('profile_picture')->where('team_id', '=', $this->teamId);
 
         if (!$query) {
-            $this->uploadHandler->setError("Team don't have a profile picture. Please set it first");
+            $this->errorHandler->setError("Team don't have a profile picture. Please set it first");
         }
 
         return $query->team_id;
