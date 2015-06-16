@@ -22,14 +22,14 @@ class ProfileController
      *
      * @var int
      */
-    private $teamId;
+    protected $teamId;
 
     /**
      * Instance of image
      *
      * @var Image
      */
-    private $uploadHandler;
+    protected $uploadHandler;
 
     /**
      * Set team id
@@ -41,50 +41,12 @@ class ProfileController
     }
 
     /**
-     * Upload profile picture, add picture into database, connect picture with team
-     *
-     * @param Request $request
-     * @return $this|ProfileController|\Illuminate\Http\RedirectResponse
-     */
-    public function uploadProfilePicture(Request $request)
-    {
-
-        $reusable = $this->isReusable($request);
-
-        if (!$this->uploadHandler->uploadPicture($reusable)) {
-            return redirect()->back()->withErrors($this->uploadHandler->getError());
-        }
-
-        if ($this->isNewTeamData()) {
-            if (!$this->insertIntoTeamData()) {
-                return $this->redirectWithErrors();
-            }
-        } else {
-
-            if (!$this->updateTeamData($this->uploadHandler->getPictureId())) {
-                return $this->redirectWithErrors();
-            }
-        }
-
-        return redirect()->back()->with('message', 'Profile picture successfully uploaded');
-    }
-
-    public function setProfilePicture($id)
-    {
-        if (!$this->updateTeamData($id)) {
-            return $this->redirectWithErrors();
-        }
-
-        return redirect()->back()->with('message', 'Profile picture successfully uploaded');
-    }
-
-    /**
      * Check readability
      *
      * @param Request $request
      * @return bool
      */
-    private function isReusable(Request $request)
+    protected function isReusable(Request $request)
     {
         if (!$request::input('reusable')) {
             return false;
@@ -98,7 +60,7 @@ class ProfileController
      *
      * @return bool
      */
-    private function isNewTeamData()
+    protected function isNewTeamData()
     {
 
         $query = DB::table('team_data')->where('team_id', '=', $this->teamId)->get();
@@ -107,6 +69,7 @@ class ProfileController
             return true;
         }
 
+        return false;
     }
 
     /**
@@ -114,7 +77,7 @@ class ProfileController
      *
      * @return bool
      */
-    private function insertIntoTeamData()
+    protected function insertIntoTeamData()
     {
 
         $query = DB::table('team_data')->insert([
@@ -138,7 +101,7 @@ class ProfileController
      * @param int $pictureId
      * @return bool
      */
-    private function updateTeamData($pictureId)
+    protected function updateTeamData($pictureId)
     {
 
         $query = DB::table('team_data')
@@ -158,32 +121,17 @@ class ProfileController
      *
      * @return $this
      */
-    private function redirectWithErrors()
+    protected function redirectWithErrors()
     {
 
         return redirect()->back()->withErrors($this->uploadHandler->getError());
     }
 
     /**
-     * Get all reusable profile pictures from database
+     * Get file system path where profile pictures are saved
      *
-     * @return bool
+     * @return string
      */
-    public function getAllProfilePicturesData()
-    {
-
-        $query = DB::table('pictures')
-            ->where('level', '=', 'profile')
-            ->where('reusable', '=', 1)
-            ->get();
-
-        if (!$query) {
-            return false;
-        }
-
-        return $query;
-    }
-
     public function getProfilePicturesPath()
     {
 
