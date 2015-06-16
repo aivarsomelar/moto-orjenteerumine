@@ -27,15 +27,40 @@ class GetPicture extends ProfileController
         return $query;
     }
 
-    public function getTeamProfilePictureId()
+    public function getTeamProfilePictureWithPath()
     {
-        $query = DB::table('team_data')->select('profile_picture')->where('team_id', '=', $this->teamId);
+
+        $query = DB::table('pictures')
+            ->select('file_name')
+            ->where('level', '=', 'profile')
+            ->where('id', '=', $this->getTeamProfilePictureId())
+            ->first();
+
+        if (!$query) {
+            if (!$this->errorHandler->getError()) {
+                $this->errorHandler->setError('Profile picture not exist');
+            }
+
+            return false;
+        }
+
+        return $this->getProfilePicturesPath(). $query->file_name;
+    }
+
+    /**
+     * Get team profile picture id
+     *
+     * @return mixed
+     */
+    private function getTeamProfilePictureId()
+    {
+        $query = DB::table('team_data')->select('profile_picture')->where('team_id', '=', $this->teamId)->first();
 
         if (!$query) {
             $this->errorHandler->setError("Team don't have a profile picture. Please set it first");
         }
 
-        return $query->team_id;
+        return $query->profile_picture;
     }
     
     /**
