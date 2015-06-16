@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Library\Image\Cover\CoverController;
-use App\Library\Image\Profile\ProfileController;
+use App\Library\Image\Profile\UploadPicture;
 use Illuminate\Support\Facades\Request;
 
 class UploadController extends Controller
@@ -42,7 +42,7 @@ class UploadController extends Controller
     public function saveProfilePicture(Request $request)
     {
 
-        $profile = new ProfileController();
+        $profile = new UploadPicture;
         return $profile->uploadProfilePicture($request);
     }
 
