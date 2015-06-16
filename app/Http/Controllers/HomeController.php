@@ -2,6 +2,7 @@
 
 
 use App\Library\Image\Cover\CoverController;
+use App\Library\Image\Profile\GetPicture;
 
 class HomeController extends Controller {
 
@@ -32,7 +33,10 @@ class HomeController extends Controller {
 	public function index()
 	{
         $covers = new CoverController();
+        $profilePicture = new GetPicture();
 
-		return view('myteam.dashboard.dashboard')->with('cover', $covers->getRandomCoverPicWithPath());
+		return view('myteam.dashboard.dashboard')
+            ->with('cover', $covers->getRandomCoverPicWithPath())
+            ->with('profilePicture', $profilePicture->getTeamProfilePictureWithPath());
 	}
 }
