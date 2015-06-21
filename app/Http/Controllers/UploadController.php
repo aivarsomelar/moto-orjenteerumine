@@ -28,11 +28,19 @@ class UploadController extends Controller
 	}
 
     /**
-     *
+     * Display profile uploading form
      */
     public function getProfileUploadForm()
     {
         return view('forms.profileForm');
+    }
+
+    /**
+     * Display user photos upload form
+     */
+    public function getMomentsUploadForm()
+    {
+        return view('forms.userPicturesForm');
     }
 
     /**

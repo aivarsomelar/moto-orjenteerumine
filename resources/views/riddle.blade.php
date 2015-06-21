@@ -13,7 +13,7 @@
         @endif
 
         <div class="col-sm-offset-10">
-            <a href="{{url('/picture/upload/form')}}">
+            <a href="{{url('/picture/moments/form')}}">
                 <button class="btn btn-margin btn-success">Lae uus pilt ülesse</button>
             </a>
         </div>
