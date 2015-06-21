@@ -28,6 +28,7 @@ Route::get('/picture/profile/all', 'PictureController@getAllProfilePictures');
 Route::get('/picture/profile/set/{id}', 'PictureController@setProfilePicture');
 
 Route::get('/home', 'HomeController@index');
+Route::get('/home/addTeamMember', 'HomeController@getTeamMemberAddForm');
 
 Route::controllers([
     'auth' => 'Auth\AuthController',

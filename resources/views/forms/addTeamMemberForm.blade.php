@@ -20,6 +20,13 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group">
+                            <label class="col-md-4 control-label" for="name">Team'i liikme nimi</label>
+                            <div class="col-md-6">
+                                <input id="name" class="form-control" name="name" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="col-md-4 control-label" for="profile">Lae ülesse team'i profiili pilt pilt</label>
                             <div class="col-md-6">
                                 <input id="profile" class="form-control" name="profile" type="file">

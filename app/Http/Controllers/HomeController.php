@@ -39,4 +39,9 @@ class HomeController extends Controller {
             ->with('cover', $covers->getRandomCoverPicWithPath())
             ->with('profilePicture', $profilePicture->getTeamProfilePictureWithPath());
 	}
+
+    public function getTeamMemberAddForm()
+    {
+        return view('forms.addTeamMemberForm');
+    }
 }

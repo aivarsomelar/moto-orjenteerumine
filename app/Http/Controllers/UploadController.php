@@ -24,7 +24,7 @@ class UploadController extends Controller
 	public function getCoverUploadForm()
 	{
 
-        return view('upload.coverForm');
+        return view('forms.coverForm');
 	}
 
     /**
@@ -32,7 +32,7 @@ class UploadController extends Controller
      */
     public function getProfileUploadForm()
     {
-        return view('upload.profileForm');
+        return view('forms.profileForm');
     }
 
     /**

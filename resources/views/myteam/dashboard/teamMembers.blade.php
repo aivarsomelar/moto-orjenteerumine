@@ -20,7 +20,7 @@
             <div class="col-md-8 list">Tom Sanders</div>
         </div>
         <div class="row text-center list">
-            <a href="#">Lisa uus liige</a>
+            <a href="{{url('home/addTeamMember')}}">Lisa uus liige</a>
         </div>
     </div>
 </div>
