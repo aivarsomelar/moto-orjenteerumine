@@ -15,7 +15,7 @@ class RiddleController extends Controller {
 	public function index()
 	{
 
-		return view('riddleForm');
+		return view('forms.riddleForm');
 	}
 
 	public function saveRiddle(Request $request)
