@@ -3,17 +3,14 @@
         <h3>Ülesanded</h3>
 
         <div class="page-header h4">Kirjeldus</div>
-        <a class="no-a-effects" href="{{'/riddle/show/all'}}">
-            <div class="well">
-                <p>
-                    Prepared is me marianne pleasure likewise debating. Wonder an unable except better stairs do ye admire.
-                    His and eat secure sex called esteem praise. So moreover as speedily differed branched ignorant. Tall
-                    are her knew poor now does then. Procured to contempt oh he raptures amounted occasion. One boy assure
-                    income spirit lovers set.
-                </p>
+        @if($randomRiddle)
+            <a class="no-a-effects" href="{{'/riddle/show/all'}}">
+                <div class="well">
+                    <p>{{$randomRiddle->riddle}}</p>
 
-                <p class="text-muted text-right">John doe</p>
-            </div>
-        </a>
+                    <p class="text-muted text-right">{{$randomRiddle->author}}</p>
+                </div>
+            </a>
+        @endif
     </div>
 </div>

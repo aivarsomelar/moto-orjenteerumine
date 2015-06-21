@@ -34,10 +34,12 @@ class HomeController extends Controller {
 	{
         $covers = new CoverController();
         $profilePicture = new GetPicture();
+        $riddle = new RiddleController();
 
 		return view('myteam.dashboard.dashboard')
             ->with('cover', $covers->getRandomCoverPicWithPath())
-            ->with('profilePicture', $profilePicture->getTeamProfilePictureWithPath());
+            ->with('profilePicture', $profilePicture->getTeamProfilePictureWithPath())
+            ->with('randomRiddle', $riddle->getRandomRiddle());
 	}
 
     public function getTeamMemberAddForm()

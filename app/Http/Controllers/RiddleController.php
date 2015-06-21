@@ -94,6 +94,10 @@ class RiddleController extends Controller
 
 		$results = $this->getAllRiddles();
 
+        if (!$results) {
+            return redirect()->back()->withErrors($this->error->getError());
+        }
+
 		return view(
 			'riddles',
 			[
@@ -101,6 +105,17 @@ class RiddleController extends Controller
 			]
         );
 	}
+
+    public function getRandomRiddle()
+    {
+        $query = DB::table('riddles')->orderByRaw('RAND()')->take(1)->first();
+
+        if (!$query) {
+            return false;
+        }
+
+        return $query;
+    }
 
     /**
      * Add riddle to database
@@ -137,7 +152,8 @@ class RiddleController extends Controller
 		$query = DB::select('select * from riddles');
 
 		if (!$query){
-			throw new Exception("Something went wrong when trying to get all riddles. Maybe there is no riddles yet!");
+            $this->error->setError('There is no riddles');
+			return false;
 		}
 
 		return $query;
