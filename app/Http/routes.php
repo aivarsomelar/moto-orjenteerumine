@@ -13,7 +13,8 @@
 Route::get('/', 'WelcomeController@index');
 
 Route::get('/riddle/insert', 'RiddleController@index');
-Route::get('/riddle/show', 'RiddleController@showRiddles');
+Route::get('/riddle/show/all', 'RiddleController@showRiddles');
+Route::get('/riddle/show/{id}', 'RiddleController@showRiddle');
 Route::get('/riddle/delete/all', 'RiddleController@deleteAllRiddles');
 Route::post('/riddle/save', 'RiddleController@saveRiddle');
 

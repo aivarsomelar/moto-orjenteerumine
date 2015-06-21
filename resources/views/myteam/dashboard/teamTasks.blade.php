@@ -3,7 +3,7 @@
         <h3>Ülesanded</h3>
 
         <div class="page-header h4">Kirjeldus</div>
-        <a class="no-a-effects" href="{{'/riddle/show'}}">
+        <a class="no-a-effects" href="{{'/riddle/show/all'}}">
             <div class="well">
                 <p>
                     Prepared is me marianne pleasure likewise debating. Wonder an unable except better stairs do ye admire.
