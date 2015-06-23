@@ -58,6 +58,7 @@ class GetPicture extends ProfileController
 
         if (!$query) {
             $this->errorHandler->setError("Team don't have a profile picture. Please set it first");
+            return false;
         }
 
         return $query->profile_picture;
