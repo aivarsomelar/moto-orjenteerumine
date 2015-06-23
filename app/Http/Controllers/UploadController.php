@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Library\Image\Cover\CoverController;
+use App\Library\Image\Moments\UploadPicture as UploadMoments;
 use App\Library\Image\Profile\UploadPicture;
 use Illuminate\Support\Facades\Request;
 
@@ -55,11 +56,23 @@ class UploadController extends Controller
         return $cover->uploadCoverPicture();
     }
 
+    /**
+     * Save uploaded profile picture into database and correct folder
+     *
+     * @param Request $request
+     * @return $this|\App\Library\Image\Profile\ProfileController|\Illuminate\Http\RedirectResponse
+     */
     public function saveProfilePicture(Request $request)
     {
 
         $profile = new UploadPicture;
         return $profile->uploadProfilePicture($request);
+    }
+
+    public function saveMomentPicture()
+    {
+        $moment = new UploadMoments();
+        return $moment->uploadMomentPicture();
     }
 
 }

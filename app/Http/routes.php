@@ -28,6 +28,7 @@ Route::post('/picture/profile/save', 'UploadController@saveProfilePicture');
 Route::get('/picture/profile/all', 'PictureController@getAllProfilePictures');
 Route::get('/picture/profile/set/{id}', 'PictureController@setProfilePicture');
 Route::get('/picture/moments/form', 'UploadController@getMomentsUploadForm');
+Route::post('/picture/moments/save', 'UploadController@saveMomentPicture');
 
 Route::get('/home', 'HomeController@index');
 Route::get('/home/addTeamMember', 'HomeController@getTeamMemberAddForm');
