@@ -86,13 +86,13 @@ class ProfileController
      *
      * @return bool
      */
-    protected function insertIntoTeamData()
+    protected function insertIntoTeamData($pictureId)
     {
 
         $query = DB::table('team_data')->insert([
             [
                 'team_id' => $this->teamId,
-                'profile_picture' => $this->uploadHandler->getPictureId()
+                'profile_picture' => $pictureId
             ]
         ]);
 
@@ -113,6 +113,14 @@ class ProfileController
     protected function updateTeamData($pictureId)
     {
 
+        if ($this->isNewTeamData()) {
+            if (!$this->insertIntoTeamData($pictureId)) {
+                return false;
+            }
+
+            return true;
+
+        }
         $query = DB::table('team_data')
             ->where('team_id', $this->teamId)
             ->update(['profile_picture' => $pictureId]);

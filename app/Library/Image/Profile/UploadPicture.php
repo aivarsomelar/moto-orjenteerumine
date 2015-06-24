@@ -23,7 +23,7 @@ class UploadPicture extends ProfileController
         }
 
         if ($this->isNewTeamData()) {
-            if (!$this->insertIntoTeamData()) {
+            if (!$this->insertIntoTeamData($this->uploadHandler->getPictureId())) {
                 return $this->redirectWithErrors();
             }
         } else {
