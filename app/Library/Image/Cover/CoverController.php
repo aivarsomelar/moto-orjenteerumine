@@ -60,7 +60,7 @@ class CoverController extends Controller
     public function uploadCoverPicture()
     {
         $upload = new Image('cover', '/pic/covers/', 'cover');
-        if(!$upload->uploadPicture(true)) {
+        if(!$upload->uploadPicture(0, true)) {
             return redirect()->back()->withErrors($upload->getError());
         }
 

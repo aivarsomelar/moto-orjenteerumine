@@ -14,11 +14,7 @@ class UploadPicture extends MomentController
     public function uploadMomentPicture()
     {
 
-        if (!$this->uploadHandler->uploadPicture(false)) {
-            return redirect()->back()->withErrors($this->uploadHandler->getError());
-        }
-
-        if (!$this->connectPictureWithTeam()) {
+        if (!$this->uploadHandler->uploadPicture($this->teamId, false)) {
             return redirect()->back()->withErrors($this->uploadHandler->getError());
         }
 

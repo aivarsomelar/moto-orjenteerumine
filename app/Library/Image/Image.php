@@ -68,10 +68,11 @@ class Image
     /**
      * Upload picture and add it to database
      *
+     * @param int $teamId
      * @param bool $reusable
      * @return bool
      */
-    public function uploadPicture($reusable = false)
+    public function uploadPicture($teamId = 0, $reusable = false)
     {
 
         if ($this->validateFileType()->fails()) {
@@ -91,7 +92,8 @@ class Image
                 [
                     'file_name' => $fileName,
                     'level' => $this->pictureLevel,
-                    'reusable' => $reusable
+                    'reusable' => $reusable,
+                    'uploader_team_id' => $teamId
                 ]
             );
 

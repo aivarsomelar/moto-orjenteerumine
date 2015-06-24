@@ -18,7 +18,7 @@ class UploadPicture extends ProfileController
 
         $reusable = $this->isReusable($request);
 
-        if (!$this->uploadHandler->uploadPicture($reusable)) {
+        if (!$this->uploadHandler->uploadPicture($this->teamId, $reusable)) {
             return redirect()->back()->withErrors($this->uploadHandler->getError());
         }
 
