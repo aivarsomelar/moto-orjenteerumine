@@ -8,9 +8,6 @@
             <li class="row list">
                 <a href="{{url('/picture/cover/form')}}">Muuda cover pilti</a>
             </li>
-            <li class="row list">
-                <a href="#">Muuda team'i kirjeldust</a>
-            </li>
         </ul>
     </div>
 </div>
