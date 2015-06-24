@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Library\Handler\Overt\TeamHandler;
 use App\Library\Image\Cover\CoverController;
 use Illuminate\View\View;
 
@@ -35,8 +36,11 @@ class PublicController extends Controller {
 	public function allTeams()
 	{
 
+        $teamHandler = new TeamHandler();
 
-		return view('teams.all');
+		return view('teams.all')
+            ->with('teams', $teamHandler->getAllTeams())
+            ->with('teamHandler', $teamHandler);
 	}
 
     /**
