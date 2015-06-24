@@ -44,11 +44,7 @@ class GetPicture extends ProfileController
             ->first();
 
         if (!$query) {
-            if (!$this->errorHandler->getError()) {
-                $this->errorHandler->setError('Profile picture not exist');
-            }
-
-            return false;
+            return $this->getProfilePicturesPath() . 'thumbnail.png';
         }
 
         return $this->getProfilePicturesPath(). $query->file_name;
