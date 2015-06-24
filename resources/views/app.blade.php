@@ -45,7 +45,7 @@
                             <li><a href="{{ url('/home') }}">Dashboard</a></li>
                             <li><a href="{{url('/team/description')}}">Teami kirjeldus</a></li>
                             <li><a href="{{ url('/riddle/show') }}">Teami ülesanded</a></li>
-                            <li><a href="{{ url('/') }}">Teami pildid</a></li>
+                            <li><a href="{{ url('/picture/moments/team/all') }}">Teami pildid</a></li>
                         </ul>
                     </li>
 					<li><a href="{{ url('/riddle/insert') }}">Kuhu minna?</a></li>

@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Library\Image\Moments\GetPictures;
 use App\Library\Image\Profile\GetPicture;
 
 class PictureController extends Controller
@@ -28,11 +29,27 @@ class PictureController extends Controller
             ->with('path', $pictures->getProfilePicturesPath());
 	}
 
+    /**
+     * Set a team profile picture
+     *
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function setProfilePicture($id)
     {
 
         $picture = new GetPicture;
 
         return $picture->setProfilePicture($id);
+    }
+
+    public function getAllTeamPictures()
+    {
+
+        $pictures = new GetPictures();
+
+        return view('pictures.allMoments')
+            ->with('pictures', $pictures->getAllTeamPictures())
+            ->with('path', $pictures->getMomentsPicturesPath());
     }
 }
