@@ -18,6 +18,8 @@ class GetPicture extends ProfileController
         $query = DB::table('pictures')
             ->where('level', '=', 'profile')
             ->where('reusable', '=', 1)
+            ->orWhere('uploader_team_id', '=', $this->teamId)
+            ->where ('level', '=', 'profile')
             ->get();
 
         if (!$query) {

@@ -1,7 +1,6 @@
 <?php
 namespace App\Library\Image\Moments;
 
-use Exception;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -28,57 +27,27 @@ class GetPictures extends MomentController
     public function getAllTeamPictures()
     {
 
-        if(!$this->getAllTeamPicturesIds())
-        {
-            return false;
-        }
-
-        $teamPicturesIds = $this->getAllTeamPicturesIds();
-
-        $pictures = [];
-
-        foreach ($teamPicturesIds as $teamPicturesId) {
-           $query = DB::table(self::PICTURE_TABLE)
-               ->where('id', '=', $teamPicturesId->picture_id)
-               ->where ('level' ,'=', 'moments')
-               ->first();
-
-            if (!$query) {
-                $this->errorHandler->setError("Picture(s) can't be received");
-                return false;
-            }
-
-            $pictures[] = $query;
-        }
-
-        return $pictures;
-    }
-
-    /**
-     * Get all pictures id's that team / user had uploaded
-     *
-     * @return array | bool
-     */
-    private function getAllTeamPicturesIds()
-    {
-        $query  = DB::table(self::TEAM_PICTURE_TABLE)->where('team_id', '=', $this->teamId)->get();
+       $query = DB::table(self::PICTURE_TABLE)
+           ->where('uploader_team_id', '=', $this->teamId)
+           ->where ('level' ,'=', 'moments')
+           ->get();
 
         if (!$query) {
-            $this->errorHandler->setError("Team don't have pictures");
             return false;
         }
-
         return $query;
     }
 
     /**
      * Get random user uploaded picture
+     *
+     * @return array | bool
      */
     public function getRandomMomentPicture()
     {
         $query = DB::table(self::PICTURE_TABLE)
             ->where('level', '=', 'Moments')
-            ->where('id', '=', $this->getRandomMomentPictureId())
+            ->where('uploader_team_id', '=', $this->teamId)
             ->orderByRaw('RAND()')->take(1)->get();
 
         if (!$query) {
@@ -101,26 +70,5 @@ class GetPictures extends MomentController
         }
 
         return false;
-    }
-
-    /**
-     * Get random user picture id
-     *
-     * @return bool
-     */
-    private function getRandomMomentPictureId()
-    {
-
-        $query = DB::table(self::TEAM_PICTURE_TABLE)
-            ->where('team_id', '=', $this->teamId)
-            ->orderByRaw('RAND()')
-            ->take(1)
-            ->first();
-
-        if (!$query) {
-            return false;
-        }
-
-        return $query->picture_id;
     }
 }
