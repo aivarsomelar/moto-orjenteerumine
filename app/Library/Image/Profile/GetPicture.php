@@ -27,6 +27,11 @@ class GetPicture extends ProfileController
         return $query;
     }
 
+    /**
+     * Get team profile picture with path
+     *
+     * @return bool|string
+     */
     public function getTeamProfilePictureWithPath()
     {
 

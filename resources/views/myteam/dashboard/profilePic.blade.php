@@ -2,7 +2,7 @@
     <div class="dashboard-section">
         <h3>Team'i profiili pilt</h3>
         @if(isset($profilePicture))
-            <a href="#">
+            <a href="{{url('/picture/profile/all')}}">
                 <div class="thumbnail">
                     <img class="pic-round" src="{{$profilePicture}}">
                 </div>

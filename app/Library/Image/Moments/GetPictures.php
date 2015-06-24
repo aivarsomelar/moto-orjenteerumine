@@ -28,6 +28,11 @@ class GetPictures extends MomentController
     public function getAllTeamPictures()
     {
 
+        if(!$this->getAllTeamPicturesIds())
+        {
+            return false;
+        }
+
         $teamPicturesIds = $this->getAllTeamPicturesIds();
 
         $pictures = [];
@@ -77,7 +82,7 @@ class GetPictures extends MomentController
             ->orderByRaw('RAND()')->take(1)->get();
 
         if (!$query) {
-            throw new Exception("There was problem wit getting random user uploaded picture");
+            return false;
         }
 
         return $query;
@@ -85,11 +90,17 @@ class GetPictures extends MomentController
 
     public function getRandomMomentPictureWithPath()
     {
-        foreach ($this->getRandomMomentPicture() as $moment) {
-            $result = $this->getMomentsPicturesPath() . $moment->file_name;
+
+        if ($this->getRandomMomentPicture()) {
+
+            foreach ($this->getRandomMomentPicture() as $moment) {
+                $result = $this->getMomentsPicturesPath() . $moment->file_name;
+            }
+
+            return $result;
         }
 
-        return $result;
+        return false;
     }
 
     /**
