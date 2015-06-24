@@ -7,15 +7,6 @@
 				<div class="panel-heading">Lae ülesse "cover" pilt</div>
 
 				<div class="panel-body">
-                    @if($errors->first())
-                        <div class="alert alert-danger" role="alert">
-                            {{$errors->first()}}
-                        </div>
-                    @endif
-                    @if(\Illuminate\Support\Facades\Session::get('message'))
-                        <div class="alert alert-success" role="alert">{{\Illuminate\Support\Facades\Session::get('message')}}</div>
-                        {{\Illuminate\Support\Facades\Session::forget('message')}}
-                    @endif
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/picture/cover/save') }}" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

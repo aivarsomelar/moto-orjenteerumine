@@ -67,6 +67,15 @@
 		</div>
 	</nav>
     <div class=container">
+        @if($errors->first())
+            <div class="alert alert-danger" role="alert">
+                {{$errors->first()}}
+            </div>
+        @endif
+        @if(\Illuminate\Support\Facades\Session::get('message'))
+            <div class="alert alert-success" role="alert">{{\Illuminate\Support\Facades\Session::get('message')}}</div>
+            {{\Illuminate\Support\Facades\Session::forget('message')}}
+        @endif
 	    @yield('content')
     </div>
 	<!-- Scripts -->
