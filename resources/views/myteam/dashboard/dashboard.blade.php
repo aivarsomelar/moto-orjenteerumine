@@ -7,13 +7,11 @@
             <div class="row">
                 <div class="col-md-9 col-xs-12">
                     @include('myteam.dashboard.teamTasks')
-                    @include('myteam.dashboard.teamMemo')
                     @include('myteam.dashboard.profilePic')
                     @include('myteam.dashboard.takenPic')
 
                 </div>
                 <div class="col-md-3 col-xs-12">
-                    @include('.myteam.dashboard.teamMembers')
                     @include('.myteam.dashboard.teamSettings')
                 </div>
             </div>
