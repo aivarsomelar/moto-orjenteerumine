@@ -18,6 +18,7 @@ class CreatePicturesTable extends Migration {
             $table->string('file_name');
             $table->string('level');
             $table->boolean('reusable');
+            $table->smallInteger('uploader_team_id');
 			$table->timestamps();
 		});
 	}
