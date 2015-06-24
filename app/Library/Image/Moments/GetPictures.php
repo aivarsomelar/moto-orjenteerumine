@@ -69,6 +69,6 @@ class GetPictures extends MomentController
             return $result;
         }
 
-        return false;
+        return $this->getMomentsPicturesPath() . 'thumbnail.png';
     }
 }
