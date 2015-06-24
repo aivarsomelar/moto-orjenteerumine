@@ -39,7 +39,7 @@ class TeamHandler
             ->first();
 
         if (!$query) {
-            return false;
+            return 'thumbnail.png';
         }
 
         return $query->file_name;
