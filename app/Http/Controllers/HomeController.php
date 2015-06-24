@@ -2,6 +2,7 @@
 
 
 use App\Library\Image\Cover\CoverController;
+use App\Library\Image\Moments\GetPictures;
 use App\Library\Image\Profile\GetPicture;
 
 class HomeController extends Controller {
@@ -34,12 +35,14 @@ class HomeController extends Controller {
 	{
         $covers = new CoverController();
         $profilePicture = new GetPicture();
+        $momentPicture = new GetPictures();
         $riddle = new RiddleController();
 
 		return view('myteam.dashboard.dashboard')
             ->with('cover', $covers->getRandomCoverPicWithPath())
             ->with('profilePicture', $profilePicture->getTeamProfilePictureWithPath())
-            ->with('randomRiddle', $riddle->getRandomRiddle());
+            ->with('randomRiddle', $riddle->getRandomRiddle())
+            ->with('randomMomentPicture', $momentPicture->getRandomMomentPictureWithPath());
 	}
 
     public function getTeamMemberAddForm()
